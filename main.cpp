@@ -26,7 +26,64 @@ void RenderScene(void) {
     glColor3ub(128, 128, 128);
     pObj = gluNewQuadric();
     gluQuadricNormals(pObj, GLU_SMOOTH);
-    
+    //Memebuat Objek kepala
+    glColor3ub(205, 133, 63); //body color
+    gluSphere(pObj, 2.5f, 26, 13);
+
+    glPushMatrix();
+    glColor3ub(0.0f, 0.0f, 0.0f);
+    glTranslatef(-1.0, -0.20, 2.4f);
+    gluSphere(pObj, 0.4f, 26, 13); //mata kiri
+    glTranslatef(2.0, 0.0, 0.0f);
+    gluSphere(pObj, 0.4f, 26, 13); //mata kanan
+    glPopMatrix();
+
+    //telinga
+    glPushMatrix();
+    glColor3ub(205, 133, 63); //body color
+    glTranslatef(-2.2f, -0.50f, 0.30f);
+    gluSphere(pObj, 0.6f, 26, 13); //Telinga kiri
+    glTranslatef(4.4f, 0.0f, 0.0f);
+    gluSphere(pObj, 0.6f, 26, 13); //telinga kanan
+    glPopMatrix();
+
+    //Topi
+    glColor3ub(20, 50, 100); //hat color
+    glPushMatrix();
+    glRotatef(240.0f, 1.0f, 0.0f, 0.0f);
+    glDisable(GL_CULL_FACE);
+    gluCylinder(pObj, 3.0f, 0.0f, 6.0f, 26, 1);
+    gluCylinder(pObj, 3.0f, 4.0f, 0.5f, 26, 1);
+    glEnable(GL_CULL_FACE);
+    glPopMatrix();
+
+    //leher dan kaki
+    glColor3ub(205, 133, 63);
+    glPushMatrix();
+    glRotatef(90.0f, 1.0, 0.0, 0.0f);
+    glDisable(GL_CULL_FACE);
+    gluCylinder(pObj, 0.5f, 0.5f, 20.0f, 26, 13);
+    glTranslatef(0.0f, 0.0f, 29.0f);
+    glPopMatrix();
+
+    //Tangan
+    //Membuat objek tangan kiri
+    glColor3ub(205, 133, 63); //body color
+    glPushMatrix();
+    glTranslatef(0.0f, -3.6f, 0.0f);
+    glRotatef(160.0f, 1.0, 0.0, 1.0f);
+    gluCylinder(pObj, 0.5f, 0.5f, 9.0f, 26, 13);
+    glTranslatef(0.0f, 0.0f, 13.0f);
+    glPopMatrix();
+    //Membuat objek tangan kanan
+    glColor3ub(205, 133, 63); //body color
+    glPushMatrix();
+    glTranslatef(0.0f, -3.6f, 0.0f);
+    glRotatef(160.0f, 1.0, 0.0, -1.0f);
+    gluCylinder(pObj, 0.5f, 0.5f, 9.0f, 26, 13);
+    glTranslatef(0.0f, 0.0f, 13.0f);
+    glPopMatrix();
+
     // Kontrol menggunakan key board untuk menggerakan objek
 
     void SpecialKeys(int key, int x, int y) {
