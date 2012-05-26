@@ -83,6 +83,55 @@ void RenderScene(void) {
     gluCylinder(pObj, 0.5f, 0.5f, 9.0f, 26, 13);
     glTranslatef(0.0f, 0.0f, 13.0f);
     glPopMatrix();
+        glColor3ub(10, 10, 10);
+    glBegin(GL_TRIANGLES);
+    {
+        M3DVector3f vPoints[3] = {
+            {3.0f, -3.50f, -0.70f},
+            { 3.40f, -10.0f, -3.10f},
+            {-3.0f, -3.50f, -0.70f}
+        };
+
+        m3dFindNormal(vNormal, vPoints[0], vPoints[1], vPoints[2]);
+        glNormal3fv(vNormal);
+        glVertex3fv(vPoints[0]);
+        glVertex3fv(vPoints[1]);
+        glVertex3fv(vPoints[2]);
+    }
+    {
+        M3DVector3f vPoints[3] = {
+            {-3.0f, -3.50f, -0.70f},
+            {3.40f, -10.0f, -3.10f},
+            { -3.40f, -10.0f, -3.10f}
+        };
+
+        m3dFindNormal(vNormal, vPoints[0], vPoints[1], vPoints[2]);
+        glNormal3fv(vNormal);
+        glVertex3fv(vPoints[0]);
+        glVertex3fv(vPoints[1]);
+        glVertex3fv(vPoints[2]);
+    }
+
+    glEnd();
+
+    //rok
+    glColor3ub(92, 51, 10);
+    glPushMatrix();
+    glTranslatef(0.0f, -2.0f, 0.0f);
+    glRotatef(90, 1.0f, 0.0f, 0.0f);
+    gluCylinder(pObj, 0.0f, 7.0f, 13.0f, 26, 13);
+    glPopMatrix();
+    //sabuk
+    glPushMatrix();
+    glColor3ub(0, 0, 0);
+    glTranslatef(0.0f, -10.3f, 0.0f);
+    glRotatef(90, 1.0f, 0.0f, 0.0f);
+    gluCylinder(pObj, 3.3f, 3.5f, 0.8f, 26, 13);
+    glPopMatrix();
+
+    glPopMatrix();
+    glutSwapBuffers();
+}
 
     // Kontrol menggunakan key board untuk menggerakan objek
 
