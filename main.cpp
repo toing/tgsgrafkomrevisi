@@ -132,6 +132,38 @@ void RenderScene(void) {
     glPopMatrix();
     glutSwapBuffers();
 }
+void SetupRC() {
+    // Menetukan nilai coordinat dan pencahayaan
+    GLfloat ambientLight[] = {0.3f, 0.3f, 0.3f, 1.0f};
+    GLfloat diffuseLight[] = {0.7f, 0.7f, 0.7f, 1.0f};
+    GLfloat specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
+    GLfloat specref[] = {1.0f, 1.0f, 1.0f, 1.0f};
+
+    glEnable(GL_DEPTH_TEST);
+    glFrontFace(GL_CCW); 
+    glEnable(GL_CULL_FACE); 
+
+    // Enable lighting
+    glEnable(GL_LIGHTING);
+
+    // Mengatur cahaya pada objek
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+    glEnable(GL_LIGHT0);
+
+
+    glEnable(GL_COLOR_MATERIAL);
+    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+
+
+    glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
+    glMateriali(GL_FRONT, GL_SHININESS, 128);
+
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+    glEnable(GL_NORMALIZE);
+}
 
     // Kontrol menggunakan key board untuk menggerakan objek
 
@@ -167,3 +199,17 @@ void RenderScene(void) {
         glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
         glTranslatef(0.0f, 0.0f, -50.0f);
     }
+int main(int argc, char* argv[]) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitWindowSize(600, 600);
+    glutCreateWindow(".:Orang-Orangan Sawah 3D");
+    glutReshapeFunc(ChangeSize);
+    glutSpecialFunc(SpecialKeys);
+    glutDisplayFunc(RenderScene);
+    SetupRC();
+    glutMainLoop();
+
+    return 0;
+}
+
